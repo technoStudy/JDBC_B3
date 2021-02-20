@@ -40,9 +40,16 @@ public class LearningJDBCTest {
     }
 
     @Test
-    public void insetUsers() throws SQLException {
+    public void insertUsers() throws SQLException {
         Statement statement = connection.createStatement();
         int rowsAffected = statement.executeUpdate("insert into users(username, fullName) values ('jdbc', 'Java DataBase Connectivity')");
+        System.out.println(rowsAffected + " rowsAffected");
+    }
+
+    @Test
+    public void deleteUsers() throws SQLException {
+        Statement statement = connection.createStatement();
+        int rowsAffected = statement.executeUpdate("delete from users where username = 'jdbc'");
         System.out.println(rowsAffected + " rowsAffected");
     }
 
