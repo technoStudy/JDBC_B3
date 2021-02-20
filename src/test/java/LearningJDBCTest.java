@@ -9,6 +9,7 @@ public class LearningJDBCTest {
 
     private Connection connection;
     private String jdbc;
+    private PreparedStatement insertUser;
 
     @BeforeClass
     public void connection() throws SQLException {
@@ -17,6 +18,7 @@ public class LearningJDBCTest {
         String password = "zhTPis0l9#$&";
         connection = DriverManager.getConnection(url, user, password);
         jdbc = "testString";
+        insertUser = connection.prepareStatement("insert into users(username, fullName) values (?, ?)");
     }
 
     @Test
@@ -54,6 +56,23 @@ public class LearningJDBCTest {
         int rowsAffected = statement.executeUpdate("delete from users where username = '" + jdbc + "'");
         System.out.println(rowsAffected + " rowsAffected");
     }
+
+    @Test
+    public void insertUsersWithPreparedStatement() throws SQLException {
+        insertUser.setString(1, jdbc);
+        insertUser.setString(2, "Java DataBase Connectivity");
+        int rowsAffected = insertUser.executeUpdate();
+        System.out.println(rowsAffected + " rowsAffected");
+    }
+
+    @Test
+    public void insertUsersWithPreparedStatement2() throws SQLException {
+        insertUser.setString(1, "Dake");
+        insertUser.setString(2, "SDK");
+        int rowsAffected = insertUser.executeUpdate();
+        System.out.println(rowsAffected + " rowsAffected");
+    }
+
 
     @AfterClass
     public void closeConnection() throws SQLException {
