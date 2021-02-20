@@ -11,7 +11,7 @@ public class LearningJDBCTest {
 
     @BeforeClass
     public void connection() throws SQLException {
-        String url = "jdbc:mysql://test.medis.mersys.io:33306/classicmodels";
+        String url = "jdbc:mysql://test.medis.mersys.io:33306/ts_dauke";
         String user = "technostudy";
         String password = "zhTPis0l9#$&";
         connection = DriverManager.getConnection(url, user, password);
@@ -20,14 +20,14 @@ public class LearningJDBCTest {
     @Test
     public void gettingCustomers() throws SQLException {
         Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("select customerName, phone, city from customers;");
+        ResultSet resultSet = statement.executeQuery("select * from users;");
 
         while(resultSet.next()) {
-            String customerName = resultSet.getString("customerName");
-            String phone = resultSet.getString("phone");
-            String city = resultSet.getString("city");
+            String username = resultSet.getString("username");
+            String active = resultSet.getString("active");
+            String created = resultSet.getString("created");
 
-            System.out.println(customerName + "\t\t\t\t" + phone + "\t\t\t\t" + city);
+            System.out.println(username + "\t\t\t\t" + active + "\t\t\t\t" + created);
         }
     }
 
