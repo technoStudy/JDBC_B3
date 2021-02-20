@@ -24,8 +24,8 @@ public class LearningJDBCTest {
 
         while(resultSet.next()) {
             String username = resultSet.getString("username");
-            String active = resultSet.getString("active");
-            String created = resultSet.getString("created");
+            boolean active = resultSet.getBoolean("active");
+            Timestamp created = resultSet.getTimestamp("created");
 
             System.out.println(username + "\t\t\t\t" + active + "\t\t\t\t" + created);
         }
