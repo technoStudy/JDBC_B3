@@ -22,7 +22,7 @@ public class LearningJDBCTest {
     }
 
     @Test
-    public void gettingCustomers() throws SQLException {
+    public void gettingUsers() throws SQLException {
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("select * from users;");
 
@@ -71,6 +71,17 @@ public class LearningJDBCTest {
         insertUser.setString(2, "SDK");
         int rowsAffected = insertUser.executeUpdate();
         System.out.println(rowsAffected + " rowsAffected");
+    }
+
+    @Test
+    public void updateUsersWithPreparedStatement() throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("update users set active = ? where active = ?");
+        statement.setBoolean(1, true);
+        statement.setBoolean(2, false);
+        int rowsAffected = statement.executeUpdate();
+        System.out.println(rowsAffected + " rowsAffected");
+
+        gettingUsers();
     }
 
 
