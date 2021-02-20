@@ -31,6 +31,13 @@ public class LearningJDBCTest {
         }
     }
 
+    @Test
+    public void updateUsers() throws SQLException {
+        Statement statement = connection.createStatement();
+        int rowsAffected = statement.executeUpdate("update users set active = true where active = false");
+        System.out.println(rowsAffected + " rowsAffected");
+    }
+
     @AfterClass
     public void closeConnection() throws SQLException {
         connection.close();
