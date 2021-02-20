@@ -1,8 +1,8 @@
-connect to company database
+task1 -> connect to company database
 select everything from countries
 print it
 
-also test that Canada is in region 2
+task2 -> also test that Canada is in region 2
 
 task3 -> solve task2 using where statement
 
