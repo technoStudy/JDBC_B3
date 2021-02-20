@@ -1,3 +1,5 @@
 connect to company database
 select everything from countries
 print it
+
+also test that Canada is in region 2
