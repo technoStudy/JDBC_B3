@@ -1,3 +1,5 @@
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -7,7 +9,7 @@ public class LearningJDBCTest {
 
     private Connection connection;
 
-    @BeforeTest
+    @BeforeClass
     public void connection() throws SQLException {
         String url = "jdbc:mysql://test.medis.mersys.io:33306/classicmodels";
         String user = "technostudy";
@@ -25,7 +27,13 @@ public class LearningJDBCTest {
             String phone = resultSet.getString("phone");
             String city = resultSet.getString("city");
 
-            System.out.println(customerName + "\t" + phone + "\t" + city);
+            System.out.println(customerName + "\t\t\t\t" + phone + "\t\t\t\t" + city);
         }
     }
+
+    @AfterClass
+    public void closeConnection() throws SQLException {
+        connection.close();
+    }
+
 }
