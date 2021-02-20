@@ -84,6 +84,21 @@ public class LearningJDBCTest {
         gettingUsers();
     }
 
+    @Test
+    public void gettingNullValue() throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("select * from users where id = ?");
+        statement.setInt(1, 3);
+        ResultSet resultSet = statement.executeQuery();
+        resultSet.first();
+
+        Boolean active = resultSet.getBoolean("active");
+        if(resultSet.wasNull()) {
+            active = null;
+        }
+        System.out.println(active);
+
+    }
+
 
     @AfterClass
     public void closeConnection() throws SQLException {
