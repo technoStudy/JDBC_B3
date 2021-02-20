@@ -46,6 +46,15 @@ public class Task1Test {
         }
     }
 
+    @Test
+    public void testTask3Test() throws SQLException {
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("select * from countries where COUNTRY_NAME = 'Canada'");
+        resultSet.first(); // important
+        String region = resultSet.getString("REGION_ID");
+        Assert.assertEquals(region, "2");
+    }
+
     @AfterClass
     public void closeConnection() throws SQLException {
         connection.close();
