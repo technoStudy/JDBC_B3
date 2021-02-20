@@ -24,10 +24,11 @@ public class LearningJDBCTest {
 
         while(resultSet.next()) {
             String username = resultSet.getString("username");
+            String fullName = resultSet.getString("fullName");
             boolean active = resultSet.getBoolean("active");
             Timestamp created = resultSet.getTimestamp("created");
 
-            System.out.println(username + "\t\t\t\t" + active + "\t\t\t\t" + created);
+            System.out.println(username + "\t\t\t\t" + fullName + "\t\t\t\t" + active + "\t\t\t\t" + created);
         }
     }
 
@@ -35,6 +36,13 @@ public class LearningJDBCTest {
     public void updateUsers() throws SQLException {
         Statement statement = connection.createStatement();
         int rowsAffected = statement.executeUpdate("update users set active = true where active = false");
+        System.out.println(rowsAffected + " rowsAffected");
+    }
+
+    @Test
+    public void insetUsers() throws SQLException {
+        Statement statement = connection.createStatement();
+        int rowsAffected = statement.executeUpdate("insert into users(username, fullName) values ('jdbc', 'Java DataBase Connectivity')");
         System.out.println(rowsAffected + " rowsAffected");
     }
 
