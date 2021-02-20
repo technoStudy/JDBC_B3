@@ -3,3 +3,6 @@ select everything from countries
 print it
 
 also test that Canada is in region 2
+
+task3 -> solve task2 using where statement
+
