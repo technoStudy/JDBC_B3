@@ -55,6 +55,16 @@ public class Task1Test {
         Assert.assertEquals(region, "2");
     }
 
+    @Test
+    public void testTask4Test() throws SQLException {
+        PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM countries join regions on countries.REGION_ID = regions.REGION_ID where COUNTRY_NAME = ?;");
+        preparedStatement.setString(1, "Singapore");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        resultSet.first(); // important
+        String region = resultSet.getString("REGION_NAME").trim();
+        Assert.assertEquals(region, "Asia");
+    }
+
     @AfterClass
     public void closeConnection() throws SQLException {
         connection.close();
