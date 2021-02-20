@@ -7,3 +7,13 @@ task2 -> also test that Canada is in region 2
 task3 -> solve task2 using where statement
 
 task4 -> create a test that tests that Singapore is in Asia
+
+
+Homework:
+task5 -> create a test that checks that : (hint: use dataprovider)
+         	- region 1 has 8 countries
+         	- region 2 has 5 countries
+         	- region 3 has 6 countries
+         	- region 4 has 6 countries
+
+task6 -> create a test that checks that every employee gets salary within range of their jobs min and max salary
