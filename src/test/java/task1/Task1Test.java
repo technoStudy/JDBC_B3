@@ -7,6 +7,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Task1Test {
     private Connection connection;
@@ -88,6 +90,38 @@ public class Task1Test {
 
         int actualCountries = resultSet.getInt(1);
         Assert.assertEquals(actualCountries, numberOfCountries);
+    }
+
+    @DataProvider
+    public Object[][] data2() throws SQLException {
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery("select region_id, count(*) from countries group by region_id;");
+
+        resultSet.last(); // point to the last row
+        int numberOfRows = resultSet.getRow();// this returns the number of the row
+        Object[][] data = new Object[numberOfRows][2];  // set the number of rows in data provider
+
+        resultSet.beforeFirst(); // reset position of my pointer
+
+        int index = 0;
+        while(resultSet.next()){
+            data[index][0] = resultSet.getInt(1);
+            data[index][1] = resultSet.getInt(2);
+            index++;
+        }
+        return data;
+    }
+
+    @Test(dataProvider = "data2")
+    public void task5v2(Integer actualRegionId, Integer actualNumberOfCountries) {
+        Map<Integer, Integer> countryCountMap = new HashMap<>();
+        countryCountMap.put(1, 8);
+        countryCountMap.put(2, 5);
+        countryCountMap.put(3, 6);
+        countryCountMap.put(4, 6);
+
+        Assert.assertEquals(actualNumberOfCountries, countryCountMap.get(actualRegionId));
+        System.out.println(actualRegionId + " " + actualNumberOfCountries);
     }
 
 
