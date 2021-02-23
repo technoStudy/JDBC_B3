@@ -3,6 +3,7 @@ package task1;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.sql.*;
@@ -64,6 +65,31 @@ public class Task1Test {
         String region = resultSet.getString("REGION_NAME").trim();
         Assert.assertEquals(region, "Asia");
     }
+
+    @DataProvider
+    public Object[][] data1(){
+        Object[][] data = {
+                {1, 8}, // region 1 has 8 countries
+                {2, 5},
+                {3, 6},
+                {4, 6}
+        };
+        return data;
+    }
+
+    @Test(dataProvider="data1")
+    public void task5(int regionId, int numberOfCountries) throws SQLException {
+        PreparedStatement statement = connection.prepareStatement("select count(*) from countries where region_id = ? group by region_id;");
+        statement.setInt(1, regionId);
+        ResultSet resultSet = statement.executeQuery();
+
+//        resultSet.next();
+        resultSet.first();
+
+        int actualCountries = resultSet.getInt(1);
+        Assert.assertEquals(actualCountries, numberOfCountries);
+    }
+
 
     @AfterClass
     public void closeConnection() throws SQLException {
